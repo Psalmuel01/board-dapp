@@ -8,7 +8,6 @@ const Board = () => {
   const abi = boardContract.abi;
   const xInput = useRef<HTMLInputElement>(null);
   const yInput = useRef<HTMLInputElement>(null);
-  // const [points, setPoints] = useState({ x: null, y: null });
   const [submit, setSubmit] = useState(false);
   const [colours, setColours] = useState([
     "transparent",
@@ -48,12 +47,10 @@ const Board = () => {
     "transparent",
   ]);
 
-  const provider = new ethers.JsonRpcProvider(
-    "https://eth-sepolia.g.alchemy.com/v2/Zi_F-3fTztPtozvm58nBdd21noBes10h"
-  );
+  const provider = new ethers.JsonRpcProvider(import.meta.env.VITE_SEPOLIARPC);
   const contract = new ethers.Contract(contractAddress, abi, provider);
 
-  let board: any[] = [];
+  const board: any[] = [];
 
   for (let i = 0; i < 5; i++) {
     for (let j = 0; j < 7; j++) {
@@ -66,7 +63,6 @@ const Board = () => {
   }
 
   const getColour = async (e: any) => {
-    //@ts-ignore
     if (xInput.current.value === "" || yInput.current.value === "") {
       return;
     }
@@ -78,15 +74,12 @@ const Board = () => {
         yInput.current?.value
       );
       const colour = ethers.formatUnits(col, 0);
-      console.log("colourrr", colour);
+      // console.log("colourrr", colour);
 
-      console.log(xInput.current?.value, yInput.current?.value);
+      // console.log(xInput.current?.value, yInput.current?.value);
       const points = { x: xInput.current?.value, y: yInput.current?.value };
 
-      //@ts-ignore
-      // setPoints({ x: xInput.current.value, y: yInput.current.value });
-
-      let index = Number(points.y) * 7 + Number(points.x);
+      const index = Number(points.y) * 7 + Number(points.x);
 
       if (colour === "0") {
         const newColours = colours;
@@ -113,7 +106,7 @@ const Board = () => {
   };
 
   useEffect(() => {
-    console.log("changed");
+    // console.log("changed");
   }, [submit, colours]);
 
   return (
