@@ -6,7 +6,7 @@ async function main() {
   await board.waitForDeployment();
 
   console.log(`Board deployed to ${board.target}`);
-  //0x5D24256675ed7600a44013DCac8dcF9404129BD1
+  //0x904A91E205343Ac7BDA1875E40cE0c1884Fb9aFd
 }
 
 // We recommend this pattern to be able to use async/await everywhere

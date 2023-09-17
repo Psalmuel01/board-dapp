@@ -8,7 +8,7 @@ const Board = () => {
   const abi = boardContract.abi;
   const xInput = useRef<HTMLInputElement>(null);
   const yInput = useRef<HTMLInputElement>(null);
-  const [points, setPoints] = useState({ x: null, y: null });
+  // const [points, setPoints] = useState({ x: null, y: null });
   const [submit, setSubmit] = useState(false);
   const [colours, setColours] = useState([
     "transparent",
@@ -73,29 +73,37 @@ const Board = () => {
     setSubmit(true);
 
     try {
-      const col = await contract.getColour(0, 1);
+      const col = await contract.getColour(
+        xInput.current?.value,
+        yInput.current?.value
+      );
       const colour = ethers.formatUnits(col, 0);
+      console.log("colourrr", colour);
+
+      console.log(xInput.current?.value, yInput.current?.value);
+      const points = { x: xInput.current?.value, y: yInput.current?.value };
+
+      //@ts-ignore
+      // setPoints({ x: xInput.current.value, y: yInput.current.value });
+
+      let index = Number(points.y) * 7 + Number(points.x);
 
       if (colour === "0") {
-        //@ts-ignore
-        setPoints({ x: xInput.current.value, y: yInput.current.value });
-        console.log(points);
-        // let index = Number(points.y) * 7 + Number(points.x);
-        // const newColours = colours;
-        // newColours[index] = "white";
-        // setColours(newColours);
+        const newColours = colours;
+        newColours[index] = "white";
+        setColours(newColours);
       } else if (colour === "1") {
-        let index = Number(points.y) * 7 + Number(points.x);
-        console.log(index);
-        colours[index] = "blue";
+        const newColours = colours;
+        newColours[index] = "blue";
+        setColours(newColours);
       } else if (colour === "2") {
-        let index = Number(points.y) * 7 + Number(points.x);
-        console.log(index);
-        colours[index] = "red";
+        const newColours = colours;
+        newColours[index] = "red";
+        setColours(newColours);
       } else if (colour === "3") {
-        let index = Number(points.y) * 7 + Number(points.x);
-        console.log(index);
-        colours[index] = "black";
+        const newColours = colours;
+        newColours[index] = "black";
+        setColours(newColours);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -106,20 +114,7 @@ const Board = () => {
 
   useEffect(() => {
     console.log("changed");
-    let index = Number(points.y) * 7 + Number(points.x);
-    if (submit) {
-      const newColours = colours;
-      newColours[index] = "white";
-      setColours(newColours);
-    }
-  }, [points, submit, colours]);
-
-  // // @ts-ignore
-  // setShowFlash(true);
-  // let index = Number(points.y) * 7 + Number(points.x);
-  // const newColours = colours;
-  // newColours[index] = "yellow";
-  // setColours(newColours);
+  }, [submit, colours]);
 
   return (
     <Wrapper>

@@ -3,7 +3,6 @@ pragma solidity ^0.8.19;
 
 contract ColourBoard {
     enum Colour {
-        transparent,
         white,
         blue,
         red,
@@ -16,11 +15,18 @@ contract ColourBoard {
 
     // mapping to store colours
     mapping(uint => Colour) colours;
- 
+
     constructor() {
-        // initialize the board with default colors (White)
+        // Initialize the board with random colors
         for (uint8 i = 0; i < BOARD_SIZE; i++) {
-            colours[i] = Colour.transparent;
+            uint8 pseudoRandom = uint8(
+                uint256(
+                    keccak256(
+                        abi.encodePacked(block.timestamp, i, block.prevrandao)
+                    )
+                ) % 4
+            );
+            colours[i] = Colour(pseudoRandom);
         }
     }
 
