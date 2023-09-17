@@ -26,6 +26,12 @@ export const Wrapper = styled.div`
     width: 40px;
   }
 
+  // input::-webkit-outer-spin-button,
+  // input::-webkit-inner-spin-button {
+  //   -webkit-appearance: none;
+  //   margin: 0;
+  // }
+
   .button {
     border-radius: 16px;
     margin-left: 20px;
@@ -46,6 +52,7 @@ export const Wrapper = styled.div`
     grid-template-columns: repeat(7, 60px);
     grid-gap: 10px;
     justify-content: center;
+    margin-top: 10%;
   }
 
   .cell {
