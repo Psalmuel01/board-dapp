@@ -62,7 +62,7 @@ const Board = () => {
     }
   }
 
-  const getColour = async (e: any) => {
+  const getColour = async () => {
     if (xInput.current.value === "" || yInput.current.value === "") {
       return;
     }
