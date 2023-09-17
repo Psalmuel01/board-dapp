@@ -9,11 +9,11 @@ async function main() {
     getColour: ethers.formatUnits(await boardContract.getColour(2, 4), 0),
   });
 
-  await boardContract.setColour(2, 4, 4);
+  // await boardContract.setColour(2, 4, 4);
 
-  console.log({
-    getColour: ethers.formatUnits(await boardContract.getColour(2, 4), 0),
-  });
+  // console.log({
+  //   getColour: ethers.formatUnits(await boardContract.getColour(2, 4), 0),
+  // });
 }
 
 // We recommend this pattern to be able to use async/await everywhere

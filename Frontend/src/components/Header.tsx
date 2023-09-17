@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <Wrapper>
       <div>
-        <h1 className="logo">Board Colour</h1>
+        <h2 className="logo">Board Colour</h2>
       </div>
       <div>
         <ConnectButton showBalance />

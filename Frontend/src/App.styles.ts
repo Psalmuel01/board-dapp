@@ -1,22 +1,23 @@
 import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+    * {
+        box-sizing: border-box;
+        font-family: 'Quicksand', sans-serif;
+    }
+
     html {
-        height: 100%;
+        // height: 100%;
     }
 
     body {
         background: #191919;
         color: #fff;
-        margin: 0;
-        padding: 0 20px;
         display: flex;
+        margin: 3%;
         justify-content: center;
-    }
-
-    * {
-        box-sizing: border-box;
-        font-family: 'Catamaran', sans-serif;
     }
 `;
 
@@ -28,5 +29,4 @@ export const Wrapper = styled.div`
   > p {
     color: #fff;
   }
-
-  `;
+`;
