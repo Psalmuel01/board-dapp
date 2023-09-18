@@ -2,8 +2,10 @@ import { Wrapper } from "./Board.styles";
 import { useState, useEffect, useRef } from "react";
 import boardContract from "../contracts/contracts.json";
 import { ethers } from "ethers";
+import { useAccount } from "wagmi";
 
 const Board = () => {
+  const { isConnected } = useAccount();
   const contractAddress = "0x904A91E205343Ac7BDA1875E40cE0c1884Fb9aFd";
   const abi = boardContract.abi;
   const xInput = useRef<HTMLInputElement>(null);
@@ -63,6 +65,10 @@ const Board = () => {
   }
 
   const getColour = async () => {
+    if (!isConnected) {
+      alert("Connect your wallet first!");
+      return;
+    }
     if (xInput.current.value === "" || yInput.current.value === "") {
       return;
     }
@@ -74,12 +80,17 @@ const Board = () => {
         yInput.current?.value
       );
       const colour = ethers.formatUnits(col, 0);
+
       // console.log("colourrr", colour);
-
       // console.log(xInput.current?.value, yInput.current?.value);
-      const points = { x: xInput.current?.value, y: yInput.current?.value };
 
+      const points = { x: xInput.current?.value, y: yInput.current?.value };
       const index = Number(points.y) * 7 + Number(points.x);
+
+      // const index = await contract.calculateIndex(
+      //   xInput.current?.value,
+      //   yInput.current?.value
+      // ); //currently internal in contract, change to public and redeploy
 
       if (colour === "0") {
         const newColours = colours;
