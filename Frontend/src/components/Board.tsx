@@ -70,6 +70,7 @@ const Board = () => {
       return;
     }
     if (xInput.current.value === "" || yInput.current.value === "") {
+      alert("Enter valid x and y coordinates");
       return;
     }
     setSubmit(true);
